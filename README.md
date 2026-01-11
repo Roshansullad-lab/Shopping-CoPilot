@@ -12,7 +12,12 @@ Install the required packages using below command
 
 pip install -r requirements.txt
 
-Running the FastAPI server which has both client and server built in to it uvicorn ReturnAssistant:app --reload
+then add you OpenAI API key to the ReturnAisstant.py which can be generated from openAI website.
+without this functionality will not work.
+
+Running the FastAPI server which has both client and server built in to it 
+
+uvicorn ReturnAssistant:app --reload
 
 Once server starts we can open any browser and go to the URL.
 
