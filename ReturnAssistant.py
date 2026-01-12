@@ -290,15 +290,24 @@ class Coordinator:
 
     async def socketstream(self, prompt: str):
         # Simulate streaming tokens
-        text = f"Got it. Ive logged your return request for {prompt}."
+        text = f"return request for {prompt}."
         #text= coordinator.route(prompt)
-        text= self.retrieval.handle(prompt)
+        if "report" in prompt.lower() or "insight" in prompt.lower():
+            text= self.report.handle(prompt)
+        elif "forecast" in prompt.lower() or "predict" in prompt.lower():
+            text=self.forecast.handle(prompt)
+        else:
+            text= self.retrieval.handle(prompt)
         print("sending result")
         print(text)
         #yield text[message]
         strDatakey = "message"
         if "item" in text:
             strDatakey = "item"
+        else:
+            json_output = json.dumps(text)
+            yield json_output
+            return
 
         try:
             json_output = json.dumps(text[strDatakey])
